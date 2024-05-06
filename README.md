@@ -1,32 +1,20 @@
-# itmo_web_2
+# itmo_web_3
 
-### Part 0
+### Part 3 (select's)
+- table messages
+<img width="966" alt="image" src="https://github.com/ugol-itmo-test/itmo_web_3/assets/103264273/0934b6a1-45a0-446d-a95b-36037cf2447b">
 
-[Скринкаст](https://ugolmariia.notion.site/web_2-c198563d5e53428a9194d3313fa176cc?pvs=4)
-
-### Part 1
-**Вопрос 1.** Зачем нужен ssh? Ответ на пару предложений
-
-- ssh используется для безопасного удаленного доступа к компьютерам через незащищенную сеть. Подключение требуется, например, для отправки файлов, просмотра логов
-
-**Вопрос 2.** Предположим, у вас есть прямой доступ к серверу(терминалу) под управлением ubuntu. У вас есть коллега Вася, который хочет получить доступ к этому серверу. Он генерирует пару ssh ключей с помощью команды ssh-keygen и дает вам свой публичный ключ. В какой файл на сервере нужно записать ключ, чтобы Вася смог подключиться к терминалу сервера?
-
-- Публичный ключ Васи нужно добавить в файл **~/.ssh/authorized_keys**
-
-**Вопрос 3.**  Тут вопрос про АПИ. Разберитесь, что такое long polling и webhooks, опишите сами в нескольких предложениях, как они работают.
-
-- Long polling - это метод обмена данными между сервером и клиентом, при котором клиент отправляет запрос на сервер и сервер не моментально отвечает, а задерживает ответ до появления новой информации или истечения таймаута
-- Webhooks - это механизм, при котором сервер отправляет запросы к указанному URL для уведомления о событиях, таких как обновление данных или изменение состояния
+- table users
+<img width="985" alt="image" src="https://github.com/ugol-itmo-test/itmo_web_3/assets/103264273/f683be38-95c5-46d3-b0be-93c6c1396f79">
 
 
-**Вопрос 4.** Найдите информацию, что такое issues на гитхабе и для чего нужны. Также вставьте ссылки на пару примеров issues в популярных open source проектах.
+1. select username from users
+<img width="130" alt="image" src="https://github.com/ugol-itmo-test/itmo_web_3/assets/103264273/f685bc80-cca9-406b-8b4b-74dbb335e8ed">
 
-- Issues на GitHub - это место, где пользователи могут создавать отчеты об ошибках, предложения по улучшению или другие комментарии к проекту. Это помогает разработчикам отслеживать проблемы и взаимодействовать с сообществом.
-- Примеры:
-      - [bootstrap](https://github.com/twbs/bootstrap/issues)
-      - [Tensorflow](https://github.com/tensorflow/tensorflow/issues)
+2. select u.username, count(m.id) from users as u, messages as m where u.id = m.from group by u.username
+<img width="222" alt="image" src="https://github.com/ugol-itmo-test/itmo_web_3/assets/103264273/1e5763cf-023c-4b7f-96da-f6fdef5fce53">
 
-**Вопрос 5.** Ваш проект используется пустую папку images, но гит не поддерживает отслеживание пустых директорий. Что делать?
+3. select u.username, count(m.id) as max from users as u, messages as m where u.id = m.to group by u.username order by max desc limit 1
+<img width="219" alt="image" src="https://github.com/ugol-itmo-test/itmo_web_3/assets/103264273/ff3fa41a-ef97-4806-8e0d-87b643e4cba9">
 
-- Гит не отслеживает пустые директории, поэтому нужно вручную добавить в них временный файл, например, .gitkeep, чтобы они были в репозитории. Это позволит сохранить структуру папок в Git, не добавляя ненужных файлов.
 
